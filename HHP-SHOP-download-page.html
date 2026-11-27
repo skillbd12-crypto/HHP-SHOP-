@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>HHP SHOP - অনলাইন রিসেলিং ও শপিং প্ল্যাটফর্ম</title>
+    
+    <!-- Favicon (Placeholder) -->
+    <link rel="icon" type="image/png" href="logo.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        /* WHITE THEME VARIABLES — Clean, modern, bright */
+        :root {
+            --bg-gradient-start: #f8fafc;
+            --bg-gradient-end: #eef2ff;
+            --card-bg: #ffffff;
+            --card-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --primary-blue: #2563eb;
+            --primary-dark: #1e40af;
+            --glow-blue: #3b82f6;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #475569;
+            --card-1-color: #2563eb;
+            --card-2-color: #059669;
+            --card-3-color: #7c3aed;
+            --card-4-color: #ea580c;
+            --red-accent: #dc2626;
+            --yellow-accent: #eab308;
+            --whatsapp-color: #25D366;
+            --facebook-color: #1877f2;
+            --telegram-color: #0088cc;
+            --border-light: #e2e8f0;
+            --soft-gray: #f1f5f9;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 20px 40px;
+        }
+
+        /* Subtle background pattern (light version) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><rect width="100" height="100" fill="transparent"/><circle cx="20" cy="20" r="4" fill="%233b82f6" opacity="0.08"/><circle cx="80" cy="40" r="3" fill="%2310b981" opacity="0.08"/><circle cx="40" cy="80" r="5" fill="%23a855f7" opacity="0.08"/><circle cx="70" cy="70" r="2" fill="%23f97316" opacity="0.08"/></svg>');
+            background-repeat: repeat;
+            background-size: 80px 80px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .header, .stats-grid, .features-section, .community-section {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header & logo */
+        .header {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 32px;
+        }
+
+        .logo-box {
+            width: 110px;
+            height: 110px;
+            background: white;
+            border-radius: 32px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+        .logo-box:hover { transform: scale(1.02); }
+
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .subtitle-sm {
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .main-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #1e40af, #2563eb, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            color: var(--text-secondary);
+            font-size: 15px;
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            align-items: center;
+            font-weight: 500;
+        }
+        .tagline span { opacity: 0.7; }
+
+        /* Download button - white theme with vibrant blue */
+        .download-btn {
+            background: linear-gradient(95deg, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 60px;
+            font-size: 17px;
+            font-weight: 700;
+            width: 100%;
+            max-width: 340px;
+            margin: 28px auto 16px;
+            cursor: pointer;
+            box-shadow: 0 12px 24px -10px rgba(37, 99, 235, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.25s;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+        }
+        .download-btn:active { transform: scale(0.97); box-shadow: 0 6px 14px -8px #1e40af; }
+        .download-btn i { font-size: 18px; }
+
+        /* Stats grid (cards) */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+            max-width: 420px;
+            margin-bottom: 30px;
+        }
+
+        /* modern white cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 20px 12px;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(0px);
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 24px 40px -16px rgba(0, 0, 0, 0.12); }
+
+        .icon-bg {
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 14px;
+            transition: all 0.2s;
+        }
+        .card h3 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+        .card p {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .card-1 .icon-bg { background: #eff6ff; color: var(--card-1-color); }
+        .card-2 .icon-bg { background: #ecfdf5; color: var(--card-2-color); }
+        .card-3 .icon-bg { background: #f5f3ff; color: var(--card-3-color); }
+        .card-4 .icon-bg { background: #fff7ed; color: var(--card-4-color); }
+
+        /* Features section */
+        .features-section { 
+            width: 100%; 
+            max-width: 450px; 
+            padding: 0 0 40px; 
+        }
+
+        .features-header { 
+            text-align: center; 
+            margin-top: 20px;
+            margin-bottom: 32px; 
+        }
+        .features-header h2 { 
+            font-size: 26px; 
+            font-weight: 800; 
+            margin-bottom: 12px; 
+            color: #0f172a;
+        }
+        .features-header p { 
+            color: var(--text-secondary); 
+            font-size: 15px; 
+            font-weight: 500; 
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 28px 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-light);
+            text-align: left;
+            transition: all 0.2s;
+        }
+        .feature-card:hover { transform: translateY(-3px); box-shadow: 0 20px 30px -14px rgba(0, 0, 0, 0.1); }
+
+        .feature-card .icon-large {
+            width: 64px; 
+            height: 64px; 
+            border-radius: 24px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            font-size: 28px; 
+            margin-bottom: 20px; 
+        }
+
+        .feature-card h3 { 
+            font-size: 20px; 
+            font-weight: 700; 
+            margin-bottom: 8px; 
+            color: #0f172a;
+        }
+        .feature-card p { 
+            color: var(--text-muted); 
+            font-size: 14px; 
+            line-height: 1.45;
+            font-weight: 500;
+        }
+
+        .card-deposit .icon-large { background: #fef2f2; color: var(--red-accent); }
+        .card-withdraw .icon-large { background: #ecfdf5; color: var(--card-2-color); }
+        .card-secure .icon-large { background: #eff6ff; color: var(--card-1-color); }
+        .card-rewards .icon-large { background: #fefce8; color: #ca8a04; }
+
+        .final-cta-text { 
+            font-size: 20px; 
+            font-weight: 700; 
+            margin: 28px 0 16px; 
+            text-align: center; 
+            color: #0f172a;
+        }
+        .final-cta-btn {
+            background: linear-gradient(95deg, #2563eb, #1e40af);
+            padding: 16px 0;
+            border-radius: 48px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            box-shadow: 0 15px 30px -12px #1e40af70;
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: 0.2s;
+            border: none;
+            margin: 0 auto;
+        }
+        .final-cta-btn:active { transform: scale(0.97); }
+
+        /* Community section - white theme */
+        .community-section {
+            width: 100%;
+            max-width: 460px;
+            padding: 40px 16px 30px;
+            text-align: center;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 56px;
+            margin-top: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+        }
+
+        .community-section h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 28px;
+            color: #0f172a;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s;
+        }
+        .social-link:hover { transform: translateY(-5px); }
+
+        .social-link i {
+            font-size: 28px;
+            width: 64px;
+            height: 64px;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .social-link span {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .whatsapp-icon { color: var(--whatsapp-color); background: white; border: 1px solid #e2e8f0; }
+        .facebook-icon { color: var(--facebook-color); background: white; border: 1px solid #e2e8f0; }
+        .telegram-icon { color: var(--telegram-color); background: white; border: 1px solid #e2e8f0; }
+
+        /* footer area */
+        .footer-logo-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .footer-logo-box {
+            width: 64px;
+            height: 64px;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .footer-logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .app-name {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(120deg, #1e40af, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-contact {
+            margin: 20px 0 20px;
+            padding: 24px 20px;
+            background: white;
+            border-radius: 36px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-light);
+        }
+
+        .developer-badge {
+            display: inline-block;
+            background: #eef2ff;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #2563eb;
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .contact-item i {
+            color: #2563eb;
+            width: 24px;
+            font-size: 16px;
+        }
+        .contact-item a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .contact-item a:hover { color: #2563eb; }
+
+        .copyright-text {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border-light);
+        }
+        .copyright-text a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 16px 16px 32px; }
+            .main-title { font-size: 24px; }
+            .stats-grid { gap: 14px; }
+            .card h3 { font-size: 20px; }
+            .feature-card { padding: 22px 18px; }
+            .community-section { padding: 30px 12px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo-box">
+            <!-- Logo placeholder – same logo.png used -->
+            <img src="logo.png" alt="HHP SHOP Logo">
+        </div>
+        <p class="subtitle-sm">আপনার অনলাইন কেনাকাটা ও রিসেলিংয়ের সহজ ঠিকানা</p>
+        <h1 class="main-title">HHP SHOP</h1>
+        <div class="tagline">
+            <span>🛍️ পণ্য দেখুন</span> • <span>📦 অর্ডার করুন</span> • <span>💰 ক্যাশব্যাক উপভোগ করুন</span>
+        </div>
+        
+        <!-- Direct APK download link (kept original) -->
+        <a href="https://rhesports.fun/HHP SHOP.apk" class="download-btn" target="_blank">
+            <i class="fa-solid fa-download"></i> HHP SHOP ব্যবহার করুন
+        </a>
+    </header>
+
+    <!-- Stats cards - light version with white glassmorphism -->
+    <div class="stats-grid">
+        <div class="card card-1">
+            <div class="icon-bg">
+                <i class="fa-solid fa-download"></i>
+            </div>
+            <h3>সহজ</h3>
+            <p>পণ্য খুঁজে নিন</p>
+        </div>
+        <div class="card card-2">
+            <div class="icon-bg">
+                <i class="fa-solid fa-users"></i>
+            </div>
+            <h3>সহজ</h3>
+            <p>অর্ডার করুন</p>
+        </div>
+        <div class="card card-3">
+            <div class="icon-bg">
+                <i class="fa-regular fa-clock"></i>
+            </div>
+            <h3>রিসেলিং</h3>
+            <p>আয়ের সুযোগ</p>
+        </div>
+        <div class="card card-4">
+            <div class="icon-bg">
+                <i class="fa-solid fa-gamepad"></i>
+            </div>
+            <h3>ক্যাশব্যাক</h3>
+            <p>যোগ্য অর্ডারে</p>
+        </div>
+    </div>
+
+    <section class="features-section">
+        <div class="features-header">
+            <h2>✨ কেন ব্যবহার করবেন HHP SHOP?</h2>
+            <p>কেনাকাটা ও রিসেলিংয়ের জন্য সহজ একটি প্ল্যাটফর্ম</p>
+        </div>
+        
+        <div class="feature-card card-deposit">
+            <div class="icon-large">
+                <i class="fa-regular fa-credit-card"></i>
+            </div>
+            <h3>সহজে পণ্য অর্ডার</h3>
+            <p>পছন্দের পণ্য বেছে নিয়ে প্রয়োজনীয় তথ্য ও ডেলিভারি ঠিকানা দিয়ে অর্ডার জমা দিতে পারবেন।</p>
+        </div>
+        
+        <div class="feature-card card-withdraw">
+            <div class="icon-large">
+                <i class="fa-solid fa-wallet"></i>
+            </div>
+            <h3>রিসেলিংয়ের সুযোগ</h3>
+            <p>পণ্যের ছবি ও তথ্য শেয়ার করে ক্রেতা সংগ্রহ করে রিসেলিংয়ের মাধ্যমে আয় করার সুযোগ তৈরি করুন।</p>
+        </div>
+        
+        <div class="feature-card card-secure">
+            <div class="icon-large">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3>পছন্দের ছবি ও কালার নির্বাচন</h3>
+            <p>একই পণ্যের একাধিক ছবি বা কালার থাকলে পছন্দের ছবিটি দেখে অর্ডার দিতে পারবেন।</p>
+        </div>
+        
+        <div class="feature-card card-rewards">
+            <div class="icon-large">
+                <i class="fa-solid fa-medal"></i>
+            </div>
+            <h3>অর্ডারে ক্যাশব্যাক</h3>
+            <p>নির্ধারিত শর্ত অনুযায়ী যোগ্য অর্ডারে ক্যাশব্যাক পাওয়ার সুবিধা রয়েছে।</p>
+        </div>
+
+        <p class="final-cta-text">🚀 HHP SHOP-এর সঙ্গে কেনাকাটা ও রিসেলিং শুরু করুন!</p>
+        
+        <a href="https://rhesports.fun/HHP SHOP.apk" class="final-cta-btn" target="_blank">
+            <i class="fa-solid fa-download"></i> ডাউনলোড HHP SHOP
+        </a>
+    </section>
+
+  
+
+        <div class="footer-logo-info">
+            <div class="footer-logo-box">
+                <img src="logo.png" alt="HHP SHOP LOGO">
+            </div>
+            <span class="app-name">HHP SHOP</span>
+        </div>
+        <p class="copyright-text">
+            © 2026 HHP SHOP | 
+            অনলাইন শপিং ও রিসেলিং প্ল্যাটফর্ম
+       </p>
+    </section>
+</body>
+</html> অ্যানিমেশন
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.step, .stat-card, .prize-card, .logo-item-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+
+        // ডাউনলোড বাটন রিডাইরেক্ট
+        const btns = document.querySelectorAll('.download-btn');
+        btns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                this.appendChild(ripple);
+                setTimeout(() => {
+                    ripple.remove();
+                    window.location.href = "https://doming/appname";
+                }, 200);
+            });
+        });
+    })();
+</script>
+</body>
+</html>
